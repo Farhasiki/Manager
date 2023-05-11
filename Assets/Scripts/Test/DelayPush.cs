@@ -8,6 +8,6 @@ public class DelayPush : MonoBehaviour{
     }
 
     private void Push(){
-        PoolManager.Instance.PushGameObject(this.name,gameObject);
+        PoolManager.Instance.PushGameObject(gameObject);
     }
 }

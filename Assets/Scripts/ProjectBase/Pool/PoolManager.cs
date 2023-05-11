@@ -16,6 +16,7 @@ public class PoolManager : BaseManager<PoolManager>{
             gameObject = objectPool[name].Dequeue();
         }else{// 创建新对象
             gameObject = GameObject.Instantiate(Resources.Load<GameObject>(name));
+            gameObject.name = name;
         }
         gameObject.SetActive(true);// 激活物体
         return gameObject;

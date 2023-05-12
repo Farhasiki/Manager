@@ -6,6 +6,8 @@ public class EventCenter : BaseManager<EventCenter>{
     public enum EventName{
         MonsterDead,
         LoadScene,
+        KetCodeDown,
+        KeyCodeUP,
     }
     private Dictionary<EventName,EventHandler> eventDictionary = new Dictionary<EventName, EventHandler>();
 

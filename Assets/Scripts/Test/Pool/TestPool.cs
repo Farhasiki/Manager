@@ -5,9 +5,7 @@ using UnityEngine;
 public class TestPool : MonoBehaviour{
     private void Update() {
         if(Input.GetMouseButtonDown(0)){
-            //PoolManager.Instance.GetGameObject("Prefabs/Cube");
-            GameObject obj = ResManager.Instance.Load<GameObject>("Prefabs/Sphere");
-            obj.transform.localScale = 2 * Vector3.one;
+            PoolManager.Instance.GetGameObjectAsync("Prefabs/Cube",null);
         }
         if(Input.GetMouseButtonDown(1)){
             //PoolManager.Instance.GetGameObject("Prefabs/Sphere");

@@ -43,9 +43,22 @@ public class PoolManager : BaseManager<PoolManager>{
             gameObject = GameObject.Instantiate(Resources.Load<GameObject>(name));
             gameObject.name = name;
         }
-        gameObject.SetActive(true);// 激活物体
-        gameObject.transform.parent = null;
         return gameObject;
+    }
+
+    /// <summary>
+    /// 异步获取资源
+    /// </summary>
+    /// <param name="name">资源名称</param>
+    public void GetGameObjectAsync(string name, System.Action<GameObject> callback){
+        if(objectPool.ContainsKey(name) && objectPool[name].poolQueue.Count > 0){
+            callback?.Invoke(objectPool[name].GetGameObject());
+        }else{// 创建新对象
+            ResManager.Instance.LoadAsync<GameObject>(name,(obj)=>{
+                obj.name = name;
+                callback?.Invoke(obj);
+            });
+        }
     }
 
     /// <summary>

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public enum EventName{
-    MonsterDead,
-}
 public class EventCenter : BaseManager<EventCenter>{
-    
+    public enum EventName{
+        MonsterDead,
+        LoadScene,
+    }
     private Dictionary<EventName,EventHandler> eventDictionary = new Dictionary<EventName, EventHandler>();
 
     /// <summary>

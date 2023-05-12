@@ -16,7 +16,7 @@ public class ScenesManager : BaseManager<ScenesManager>{
     private IEnumerator ReallyLoadSceneAsync(string sceneName, Action action){
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
         while(!asyncOperation.isDone){
-            EventCenter.Instance.EventTrigger(EventCenter.EventName.LoadScene,asyncOperation.progress);
+            EventCenter.Instance.EventTrigger(EventName.LoadScene,asyncOperation.progress);
             yield return asyncOperation.progress;
         }
         action?.Invoke();

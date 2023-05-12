@@ -13,7 +13,7 @@ public class Monster : MonoBehaviour{
     }
     public void Dead(){
         Debug.Log("怪物死了");
-        EventCenter.Instance.EventTrigger(EventCenter.EventName.MonsterDead,this,new OnMonsterDeadArgs{
+        EventCenter.Instance.EventTrigger(EventName.MonsterDead,this,new OnMonsterDeadArgs{
             name = this.name
         });
     }

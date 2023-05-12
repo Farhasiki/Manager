@@ -9,10 +9,10 @@ public class InputManager : BaseManager<InputManager>{
 
     private void CheckKeyCode(KeyCode keyCode){
         if(Input.GetKeyDown(keyCode)){
-            EventCenter.Instance.EventTrigger(EventCenter.EventName.KetCodeDown,keyCode);
+            EventCenter.Instance.EventTrigger(EventName.KetCodeDown,keyCode);
         }
         if(Input.GetKeyUp(keyCode)){
-            EventCenter.Instance.EventTrigger(EventCenter.EventName.KeyCodeUP,keyCode);
+            EventCenter.Instance.EventTrigger(EventName.KeyCodeUP,keyCode);
         }
     }
     private bool isOpen = false;

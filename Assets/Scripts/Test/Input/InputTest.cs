@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class InputTest : MonoBehaviour{
     private void Start() {
-        InputManager.Instance.StartOrEndCheck(true);
-        EventCenter.Instance.AddEventListener(EventCenter.EventName.KetCodeDown,KeyDown);
-        EventCenter.Instance.AddEventListener(EventCenter.EventName.KeyCodeUP,KeyUp);
+        EventCenter.Instance.AddEventListener<KeyCode>(EventName.KetCodeDown,KeyDown);
+        EventCenter.Instance.AddEventListener<KeyCode>(EventName.KeyCodeUP,KeyUp);
     }
-    private void KeyDown(object key){
+    private void KeyDown(KeyCode key){
         Debug.Log("asd");
     }
-    private void KeyUp(object key){
+    private void KeyUp(KeyCode key){
         Debug.Log("r");
     }
 }

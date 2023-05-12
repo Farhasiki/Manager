@@ -31,7 +31,7 @@ public class EventCenter : BaseManager<EventCenter>{
     /// <summary>
     /// 删除事件
     /// </summary>
-    public void SubEventListener(EventName eventName, EventHandler action){
+    public void RemoveEventListener(EventName eventName, EventHandler action){
         eventDictionary.TryGetValue(eventName, out EventHandler actionQueue);
         if(actionQueue != null) actionQueue -= action;
     }
@@ -63,7 +63,7 @@ public class EventCenter : BaseManager<EventCenter>{
     /// <summary>
     /// 删除事件
     /// </summary>
-    public void SubEventListener(EventName eventName, Action<object> action){
+    public void RemoveEventListener(EventName eventName, Action<object> action){
         eventDictionary1.TryGetValue(eventName, out Action<object> actionQueue);
         if(actionQueue != null) actionQueue -= action;
     }

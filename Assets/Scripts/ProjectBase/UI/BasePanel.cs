@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class BasePanel : MonoBehaviour{
     private Dictionary<string,List<UIBehaviour>> controlDic = new Dictionary<string, List<UIBehaviour>>();
 
-    private void Awake() {
+    protected virtual void Awake() {
         FindChildrenControl<Button>();
         FindChildrenControl<Image>();
         FindChildrenControl<Toggle>();
@@ -31,17 +31,26 @@ public class BasePanel : MonoBehaviour{
     /// </summary>
     private void FindChildrenControl<T>()where T : UIBehaviour{
         List<T> controls = this.GetComponentsInChildren<T>().ToList();
-        string name;
         foreach(var control in controls){
-            name = control.gameObject.name;
+            var name = control.gameObject.name;
             if(controlDic.ContainsKey(name)){
                 controlDic[name].Add(control);
             }else{
                 controlDic.Add(name,new List<UIBehaviour>{control});
             }
+            if(control is Button){
+                (control as Button).onClick.AddListener(() => {
+                    OnClick(name);
+                });
+            }else if (control is Toggle){
+                (control as Toggle).onValueChanged.AddListener((value) => {
+                    OnValueChange(name,value);
+                });
+            }
         }
     }
-
+    protected virtual void OnClick(string buttonName){}
+    protected virtual void OnValueChange(string toggleName,bool value){}
     public virtual void Show(){
 
     }

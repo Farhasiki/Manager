@@ -5,8 +5,8 @@ using UnityEngine;
 public class MusicManager : BaseManager<MusicManager>{
     private const string MUSIC_RESOURCES = "";
     private const string SOUND_RESOURCES = "";
-    private AudioSource BGMusic = null;
-    private float BGMValue = 1f;
+    private AudioSource BGM_Music = null;
+    private float BGM_Value = 1f;
     private float soundValue = 1f;
     private GameObject soundGameObject = null;
     private List<AudioSource> soundList = new List<AudioSource>();
@@ -25,17 +25,17 @@ public class MusicManager : BaseManager<MusicManager>{
     }
 
     public void PlayBackGroundMusic(string name){
-        if(BGMusic == null){
-            GameObject gameObject = new GameObject("BGMusic");
-            BGMusic = gameObject.AddComponent<AudioSource>();
+        if(BGM_Music == null){
+            GameObject gameObject = new GameObject("BGM_Music");
+            BGM_Music = gameObject.AddComponent<AudioSource>();
         }
 
         // 异步加载音乐
         ResManager.Instance.LoadAsync<AudioClip>(MUSIC_RESOURCES + name,(clip)=>{
-            BGMusic.clip = clip;
-            BGMusic.loop = true;
-            BGMusic.volume = BGMValue;
-            BGMusic.Play();
+            BGM_Music.clip = clip;
+            BGM_Music.loop = true;
+            BGM_Music.volume = BGM_Value;
+            BGM_Music.Play();
         });
     }
 
@@ -43,22 +43,22 @@ public class MusicManager : BaseManager<MusicManager>{
     /// 暂停播放背景音乐
     /// </summary>
     public void PauseBGMusic(){
-        BGMusic?.Pause();
+        BGM_Music?.Pause();
     }
     /// <summary>
     /// 停止播放背景音乐
     /// </summary>
     public void StopBKMusic(){
-        BGMusic?.Stop();
+        BGM_Music?.Stop();
     }
 
     /// <summary>
     /// 改变音乐大小
     /// </summary>
     public void ChangeBGMValue(float value){
-        BGMValue = value;
-        if(BGMusic == null)return ;
-        BGMusic.volume = value;
+        BGM_Value = value;
+        if(BGM_Music == null)return ;
+        BGM_Music.volume = value;
     }
 
     /// <summary>

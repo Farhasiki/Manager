@@ -59,6 +59,7 @@ public class UIManager : BaseManager<UIManager>{
                 gameObject.transform.SetParent(father,false);
                 gameObject.transform.localPosition = Vector3.zero;
                 gameObject.transform.localScale = Vector3.one;
+                gameObject.transform.name = panelName;
                 (gameObject.transform as RectTransform).offsetMax = Vector2.zero;
                 (gameObject.transform as RectTransform).offsetMin = Vector2.zero;
             }

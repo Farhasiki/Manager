@@ -51,7 +51,7 @@ public class EventCenter : BaseManager<EventCenter>{
     /// </summary>
     public void RemoveEventListener(EventName eventName, EventHandler action){
         eventDictionary.TryGetValue(eventName, out EventHandler actionQueue);
-        if(actionQueue != null) actionQueue -= action;
+        actionQueue -= action;
     }
 
     // 清空事件
@@ -81,12 +81,14 @@ public class EventCenter : BaseManager<EventCenter>{
     /// 触发事件
     /// </summary>
     public void EventTrigger<T>(EventName eventName, T info){
-        eventDictionary1.TryGetValue(eventName,out IEventInfo action);
-        (action as EventInfo<T>).actions?.Invoke(info);
+        if(eventDictionary1.TryGetValue(eventName,out IEventInfo action)){
+            (action as EventInfo<T>).actions?.Invoke(info);
+        }
     }
     public void EventTrigger(EventName eventName){
-        eventDictionary1.TryGetValue(eventName,out IEventInfo action);
-        (action as EventInfo).actions?.Invoke();
+        if(eventDictionary1.TryGetValue(eventName,out IEventInfo action)){
+            (action as EventInfo).actions?.Invoke();
+        }
     }
     
     /// <summary>

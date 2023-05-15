@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 /// <summary>
 /// 面板层级
@@ -97,5 +99,19 @@ public class UIManager : BaseManager<UIManager>{
     }
     public Transform GetLayer(E_UI_Layer layer){
         return UI_Layer[layer]; 
+    }
+
+    /// <summary>
+    /// 控件添加自定义事件监听
+    /// </summary>
+    public void AddCustomEventListener(UIBehaviour control,EventTriggerType type,UnityAction<BaseEventData> callback){
+        EventTrigger trigger = control.GetComponent<EventTrigger>();
+        if(trigger == null) control.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = type;
+        entry.callback.AddListener(callback);
+
+        trigger.triggers.Add(entry);
     }
 }
